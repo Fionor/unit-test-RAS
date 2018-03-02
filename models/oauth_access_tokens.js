@@ -25,6 +25,6 @@ const oauth_access_tokens_Schema = new mongoose.Schema({
         required: false,
         default: null
     }
-}, {_id: false, versionKey: false});
+}, {versionKey: false});
 
 mongoose.model('oauth_access_tokens', oauth_access_tokens_Schema);

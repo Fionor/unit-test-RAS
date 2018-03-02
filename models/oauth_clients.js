@@ -2,10 +2,6 @@ const mongoose = require('mongoose');
 
 const ObjectId = mongoose.Schema.ObjectId;
 const oauth_clients_Schema = new mongoose.Schema({
-    client_id: {
-        type: String,
-        required: true
-    },
     name: {
         type: String,
         required: true
@@ -35,6 +31,19 @@ const oauth_clients_Schema = new mongoose.Schema({
         required: false,
         default: null
     }
-}, {_id: false, versionKey: false});
+}, {
+    versionKey: false,
+    toObject: {
+        virtuals: true
+    },
+    toJSON: {
+        virtuals: true 
+    }
+});
+
+oauth_clients_Schema.virtual('client_id').get(function(){
+    return this._id;
+});
 
 mongoose.model('oauth_clients', oauth_clients_Schema);
+

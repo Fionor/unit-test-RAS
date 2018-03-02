@@ -25,6 +25,6 @@ const oauth_refresh_tokens_Schema = new mongoose.Schema({
         required: false,
         default: null
     }
-}, {_id: false, versionKey: false});
+}, {versionKey: false});
 
 mongoose.model('oauth_refresh_tokens', oauth_refresh_tokens_Schema);
