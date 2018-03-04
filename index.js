@@ -20,7 +20,7 @@ const config = require('./config');
 
 const routes = require('./routes/index');
 
-app.set('port', process.env.PORT || config.aouth.port);
+app.set('port', process.env.PORT || config.oauth.port);
 
 app.use(logger('dev'));
 app.use(helmet());
@@ -31,7 +31,7 @@ app.use(express.static(path.join(__dirname, 'dist')));
 app.use('/', routes);
 
 app.use(function(req, res) {
-    res.sendFile(path.join(__dirname, '..', 'dist', 'index.html'));
+    res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
 
 const server = http.listen(app.get('port'), ()=>{

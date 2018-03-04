@@ -5,7 +5,7 @@ let db_uri;
 if (process.env.NODE_ENV === 'production') {
     db_uri = process.env.MONGO_URI;
 } else {
-    db_uri = config.aouth.db_uri;
+    db_uri = config.oauth.db_uri;
 }
 
 mongoose.connect(db_uri); 
