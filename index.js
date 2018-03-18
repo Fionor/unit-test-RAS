@@ -1,9 +1,8 @@
 require('dotenv').load();
 
 require('./db');
-require('./models/oauth_access_tokens');
+require('./models/oauth_tokens');
 require('./models/oauth_clients');
-require('./models/oauth_refresh_tokens');
 
 const express = require('express');
 const app = express();
