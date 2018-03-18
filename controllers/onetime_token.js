@@ -7,7 +7,7 @@ module.exports.get_token = async (req, res) => {
         }
         const result = await redis_model.get_onetime_token(req.query.onetime_token);
         if( result ){
-            return res.send({response: [{onetime_token: Boolean(result)}]});
+            return res.send({status: 200, response: [{onetime_token: Boolean(result)}]});
         } else {
             return res.send({status: 400, error: {error_msg: 'invalid_onetime_token'}});
         }
