@@ -38,6 +38,6 @@ module.exports.register_user = async (req, res) => {
         
     } catch (error) {
         console.log('register_user', error);
-        res.send(500, {error: {error_msg: error}});
+        res.send({status: 500, error: {error_msg: error}});
     }
 }
