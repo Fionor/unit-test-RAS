@@ -165,11 +165,11 @@ module.exports.logout = async (req, res) => {
             if( Math.round((Date.now() - user_tokens.create_at.getTime()) / 1000) > user_tokens.access_expires ){
                 return res.send({status: 401, error: {error_msg: 'invalid_token'}});
             }
-            const response = await Tokens.findOneAndRemove({access_token: req.query.access_token}).exec();
-            console.log(response);
-            res.send({status: 200});
+            await Tokens.findOneAndRemove({access_token: req.query.access_token}).exec();
+            return res.send({status: 200});
+        } else {
+            return res.send({status: 401, error: {error_msg: 'invalid_token'}});
         }
-        return res.send({status: 401, error: {error_msg: 'invalid_token'}});
     } catch (error) {
         console.log('logout', error);
         res.send({status: 500, error: {error_msg: error}});
