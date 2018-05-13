@@ -7,6 +7,7 @@ const ctrl_onetime_token = require('../controllers/onetime_token');
 const ctrl_user = require('../controllers/user');
 
 router.post('/token', ctrl_token.get_token);
+router.get('/logout', ctrl_token.logout);
 router.get('/token-info', ctrl_token.token_info);
 
 router.post('/client', ctrl_client.create_client);
