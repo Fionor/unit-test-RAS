@@ -6,6 +6,7 @@ require('./models/oauth_clients');
 
 const express = require('express');
 const app = express();
+const cors = require('cors');
 const http = require('http').Server(app, {
     serveClient: false
 });
@@ -27,7 +28,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'dist')));
 
-app.use('/', routes);
+app.use('/', cors(), routes);
 
 app.use(function(req, res) {
     res.sendFile(path.join(__dirname, 'dist', 'index.html'));
