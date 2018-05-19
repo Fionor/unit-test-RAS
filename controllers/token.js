@@ -16,7 +16,9 @@ module.exports.get_token = async (req, res) => {
     }
     switch (req.body.grant_type) {
         case 'password':
-            if( ( req.body.client_id == null || ObjectId.isValid(req.body.client_id) == false ) || req.body.client_secret == null || req.body.username == null || req.body.password == null){
+            if( ( req.body.client_id == null || ObjectId.isValid(req.body.client_id) == false ) || req.body.client_secret == null 
+            || req.body.username == null || req.body.username.length < 4  || !req.body.username.match(/^\w+$/) 
+            || req.body.password == null || req.body.password.length < 6 || !req.body.password.match(/^\w+$/)){
                 return res.send({status: 400, error: {error_msg: "invalid_request"}});
             }
             if( client == null ) {
@@ -165,7 +167,11 @@ module.exports.logout = async (req, res) => {
             if( Math.round((Date.now() - user_tokens.create_at.getTime()) / 1000) > user_tokens.access_expires ){
                 return res.send({status: 401, error: {error_msg: 'invalid_token'}});
             }
-            await Tokens.findOneAndRemove({access_token: req.query.access_token}).exec();
+            if(req.query.all == 1){
+                await Tokens.remove({user_id: user_tokens.user_id}).exec();
+            } else {
+                await Tokens.findOneAndRemove({access_token: req.query.access_token}).exec();
+            } 
             return res.send({status: 200});
         } else {
             return res.send({status: 401, error: {error_msg: 'invalid_token'}});
