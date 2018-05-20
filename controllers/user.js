@@ -10,7 +10,7 @@ module.exports.register_user = async (req, res) => {
             !fio.match(/^[А-яіїєыЫІЇЄ]+\s[А-яіїєыЫІЇЄ]+\s[А-яіїєыЫІЇЄ]+$/) ||
             req.body.role == '' || (req.body.role == 'student' && !req.body.group_id) ){
 
-            return res.send(400, {error: {error_msg: 'invalid_request'}});
+            return res.send({status: 400, errors: [{error_msg: 'invalid_request'}]});
         }
 
         const token = await redis_model.set_onetime_token();
