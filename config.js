@@ -1,6 +1,5 @@
 module.exports = {
     oauth: {
-        db_uri: 'mongodb://localhost:27017/unit-test-ras',
         port: 3001,
         url: '127.0.0.1',
         access_token_expires: 300, // 5m
